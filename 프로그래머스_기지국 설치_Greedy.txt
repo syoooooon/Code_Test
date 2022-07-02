@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+
+class Solution {
+    public int solution(int n, int[] stations, int w) {
+        int answer = 0;
+
+        // 아파트에 전파 범위 표시하기
+        boolean apartment[] = new boolean[n+1];
+        
+        for (int station : stations) {
+            for(int i = station - w; i <= station + w; i++) {
+                if (i >= 1 && i <= n) {
+                    apartment[i] = true;
+                }
+            }
+        }
+        
+        // 아파트 순회
+        
+        int position = 1; //위치 초기값
+        
+        while(position <= n) {
+            if (apartment[position]) {
+                position ++; //한칸씩 이동
+            } else {
+                answer ++;
+                position += w * 2 + 1;
+            }
+        }
+        
+        return answer;
+    }
+}
